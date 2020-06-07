@@ -1,0 +1,7 @@
+Python3 A* pathfinder v0.1
+This algorithm uses Euclidean distance
+
+Future updates:
+    - Make matrix bigger
+    - Add GUI
+    - Add diferente value for (x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1) sons
