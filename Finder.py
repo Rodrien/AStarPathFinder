@@ -91,7 +91,7 @@ def remove(current,open_nodes):
         if(equals(x,current)):
             open_nodes.remove(x)
 
-def lowest(open_nodes): #returns open nodes sorted with lowest value, ERROR no funciona
+def lowest(open_nodes): #returns open nodes sorted with lowest value
     low = open_nodes[0]
     for i in open_nodes:
         if (i.fcost < low.fcost):
