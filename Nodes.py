@@ -30,4 +30,8 @@ def distance(self,B):
     x2=B.position[0]
     y2=B.position[1]
     return math.sqrt((x-x2)**2+(y-y2)**2)
+
+#Other distance for testing 
+def distanceB(self,B):
+    pass
         
