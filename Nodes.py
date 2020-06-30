@@ -23,15 +23,10 @@ def closer(self,B):
 def fCost(self):
     return self.gcost + self.hcost
 
-#distance from A to B
 def distance(self,B):
     x=self.position[0]
     y=self.position[1]
     x2=B.position[0]
     y2=B.position[1]
-    return math.sqrt((x-x2)**2+(y-y2)**2)
-
-#Other distance for testing 
-def distanceB(self,B):
-    pass
+    return abs((x-x2))+abs((y-y2))
         

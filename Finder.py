@@ -12,11 +12,16 @@ def main():
 
     finish = n.node(7,8)
     grid[7][8].type = 'B' 
-    
     grid[5][5].type ='X' #placed a wall #place walls all around the grid 
     grid[6][5].type ='X' #placed a wall 
     grid[5][5].type ='X'
     grid[5][4].type ='X'
+    grid[1][3].type ='X'
+    grid[1][4].type ='X'
+    grid[4][4].type ='X'
+    grid[3][4].type ='X'
+    grid[3][3].type ='X'
+    grid[2][3].type ='X'
     grid[5][3].type ='X'
     grid[5][2].type ='X'
 
@@ -36,11 +41,9 @@ def main():
     showPath(grid,path)
     drawGrid(grid)
 
-    
-
 def finder(grid,open_nodes,closed_nodes,start,finish):
     while(open_nodes != []):
-        lowest(open_nodes) #sort nodes so first is the closest one
+        sorted(open_nodes) #sort nodes so first is the closest one
         
         current = open_nodes.pop(0)        
         closed_nodes.append(current)
@@ -55,9 +58,9 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
             return path[::-1] #path reversed
         else: #current != finish
             (x,y) = current.position
-            neighbors = [(x-1, y,10), (x+1, y,10), (x, y-1,10), (x, y+1,10),(x+1,y+1,14),(x-1,y-1,14),(x+1,y-1,14),(x-1,y+1,14)] #(x+1,y+1,14),(x-1,y-1,14),(x+1,y-1,14),(x-1,y+1,14)
+            neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1),(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)]
             for i in neighbors:
-                (a,b,z) = i #neighbors coordinates
+                (a,b) = i #neighbors coordinates
                 if grid[a][b].type == 'X': 
                     continue
                 son = n.node(a,b)
@@ -68,8 +71,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
                         door = False
                 if door:
                     son.hcost = distance(son,finish)
-                    son.gcost = distance(son,start) #+ float(z)
-                    print(float(z))
+                    son.gcost = distance(son,start)
                     son.fcost = son.hcost + son.gcost
                     if(addToOpen(open_nodes,son)):
                         for f in open_nodes:
@@ -98,7 +100,7 @@ def remove(current,open_nodes):
         if(equals(x,current)):
             open_nodes.remove(x)
 
-def lowest(open_nodes): #returns open nodes sorted with lowest value
+def sorted(open_nodes): #returns open nodes sorted with sorted value
     low = open_nodes[0]
     for i in open_nodes:
         if (i.fcost < low.fcost):
