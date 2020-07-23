@@ -6,8 +6,9 @@ Built using Python3 and PyGame.
 ## Instructions
 - First click sets the start node.
 - Second click sets the end node.
+- Create walls by clicking or by clicking and dragging.
 - Enter finds the shortest path.
-- Backspace resets everything (pending)
+- Backspace resets everything. (pending)
 
 ## Examples
 <img src="/Photos/Example.png">
@@ -18,4 +19,6 @@ Built using Python3 and PyGame.
 <img src="/Photos/Example6.png">
 
 ## Future updates
-- Visualize how the algorithm finds the shortest path
+- Fix minor bigs with gui.
+- Visualize how the algorithm finds the shortest path.
+
