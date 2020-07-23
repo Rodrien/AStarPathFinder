@@ -1,45 +1,28 @@
+import pygame as py
+import Nodes as N
 from Nodes import *
-import Nodes as n
 
-lenY = 50
-lenX = 50
-
-def main():
-    grid = [[n.node(x,y) for x in range(lenX)] for y in range(lenY)] 
-    
-    start = n.node(1,1)
-    grid[1][1].type = 'A' 
-
-    finish = n.node(7,8)
-    grid[7][8].type = 'B' 
-    grid[5][5].type ='X' #placed a wall #place walls all around the grid 
-    grid[6][5].type ='X' #placed a wall 
-    grid[5][5].type ='X'
-    grid[5][4].type ='X'
-    grid[1][3].type ='X'
-    grid[1][4].type ='X'
-    grid[4][4].type ='X'
-    grid[3][4].type ='X'
-    grid[3][3].type ='X'
-    grid[2][3].type ='X'
-    grid[5][3].type ='X'
-    grid[5][2].type ='X'
-
-    for i in {0,lenX-1}:
-        for j in range(lenX):
-            grid[i][j].type = 'X'
-    for i in [0,lenX-1]:
-        for j in range(lenX):
-            grid[j][i].type = 'X'
-
+def solve(squares):
     open_nodes = []
     closed_nodes = []
-    open_nodes.append(start) #open starting node
 
-    path = finder(grid,open_nodes,closed_nodes,start,finish) #shortest path will be stored here
+    grid = [[0 for x in range(CANTIDAD)] for y in range(CANTIDAD)] 
 
-    showPath(grid,path)
-    drawGrid(grid)
+    for x in range(CANTIDAD):
+        for y in range(CANTIDAD):   
+            s = squares[x][y]
+            if s.color == GREEN: #open starting node
+                grid[x][y] = 'A'
+                start = N.node(x,y)
+                open_nodes.append(start) #open start
+            elif s.color == BLUE: #set end node
+                grid[x][y] = 'B'
+                finish = N.node(x,y)
+            elif s.color == BLACK:
+                grid[x][y] = 'X'
+
+    path = finder(grid,open_nodes,closed_nodes,start,finish)
+    return path
 
 def finder(grid,open_nodes,closed_nodes,start,finish):
     while(open_nodes != []):
@@ -61,9 +44,9 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
             neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1),(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)]
             for i in neighbors:
                 (a,b) = i #neighbors coordinates
-                if grid[a][b].type == 'X': 
+                if grid[a][b] == 'X': 
                     continue
-                son = n.node(a,b)
+                son = N.node(a,b)
                 son.father = current
                 door = True
                 for c in closed_nodes:
@@ -79,14 +62,6 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
                                 open_nodes.remove(f)
                         open_nodes.append(son)
     return []
-
-def showPath(grid,path):
-    for p in path:
-        print(p)
-        x = p[0]
-        y = p[1]
-        if (grid[x][y].type != 'A' and grid[x][y].type != 'B'):
-            grid[x][y].type = '*'
 
 def addToOpen(open_nodes, son):
     for node in open_nodes:
@@ -107,11 +82,47 @@ def sorted(open_nodes): #returns open nodes sorted with sorted value
             low = i
     open_nodes.remove(low)
     open_nodes.insert(0,low)
-    
-def drawGrid(grid):
-    for x in range(lenX):
-        for y in range(lenY):
-            print(grid[y][x].type,end = "")
-        print("")
 
-main()
+#load logo and set window name and background
+#logo = py.image.load("./Icons/snake64.png")
+#py.display.set_icon(logo)
+py.display.set_caption("Nodes")
+screen = py.display.set_mode((W_SIZE+1,W_SIZE+1))
+
+#start nodes
+squares = startNodes()
+
+#shortest path
+path = []
+
+key = 1
+click = False
+running = True
+while running:
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            running = False
+        if event.type == py.KEYDOWN:
+            if event.key == py.K_RETURN:
+                path = solve(squares)
+                paint(squares,path)
+            if event.key == py.K_BACKSPACE: #fix
+                restart(squares)
+                print("in")
+        if event.type == py.MOUSEBUTTONDOWN:
+            #get mouse location 
+            click = True
+            while click: #works but must re think, bugs with key
+                position = py.mouse.get_pos()
+                changeNodes(squares,position,key,screen)
+                #drawLines(screen)
+                py.display.update()
+                for event2 in py.event.get():
+                    if event2.type == py.MOUSEBUTTONUP:
+                        click = False
+            key = key + 1
+
+    drawNodes(screen,squares)
+    #drawLines(screen)
+    py.display.update()
+
