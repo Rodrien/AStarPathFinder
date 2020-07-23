@@ -41,7 +41,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
             return path[::-1] #path reversed
         else: #current != finish
             (x,y) = current.position
-            neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1),(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)]
+            neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1)]#,(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)]
             for i in neighbors:
                 (a,b) = i #neighbors coordinates
                 if grid[a][b] == 'X': 
@@ -65,7 +65,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
 
 def addToOpen(open_nodes, son):
     for node in open_nodes:
-        if (equals(son,node) and son.fcost >= node.fcost):
+        if (equals(son,node) and son.fcost == node.fcost):
             return False
     return True
 
@@ -80,6 +80,10 @@ def sorted(open_nodes): #returns open nodes sorted with sorted value
     for i in open_nodes:
         if (i.fcost < low.fcost):
             low = i
+        elif (i.fcost == low.fcost): #if fcost equal keep the one with the lowest gcost
+            if (i.gcost < low.gcost):
+                low = i
+
     open_nodes.remove(low)
     open_nodes.insert(0,low)
 

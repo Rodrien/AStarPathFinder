@@ -2,4 +2,4 @@ Python3 A* pathfinder v0.2
 This algorithm uses Manhattan distance
 
 Future updates:
-    - Add GUI
+    - Show how the algorithm finds the correct path
