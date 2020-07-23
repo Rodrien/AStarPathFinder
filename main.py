@@ -90,7 +90,7 @@ def sorted(open_nodes): #returns open nodes sorted with sorted value
 #load logo and set window name and background
 #logo = py.image.load("./Icons/snake64.png")
 #py.display.set_icon(logo)
-py.display.set_caption("Nodes")
+py.display.set_caption("Path Finder")
 screen = py.display.set_mode((W_SIZE+1,W_SIZE+1))
 
 #start nodes

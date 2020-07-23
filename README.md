@@ -1,7 +1,7 @@
 # A* Path Finder
 This is a A* Path Finder implementation using manhattan distance with a GUI for visualization.
 
-Built useing Python3 and PyGame.
+Built using Python3 and PyGame.
 
 ## Examples
 <img src="/Photos/Example.png">
@@ -11,6 +11,11 @@ Built useing Python3 and PyGame.
 <img src="/Photos/Example5.png">
 <img src="/Photos/Example6.png">
 
+## Instructions
+- First click sets the start node.
+- Second click sets the end node.
+- Enter finds the shortest path.
+- Backspace resets everything (pending)
 
 ## Future updates
 - Visualize how the algorithm finds the shortest path
