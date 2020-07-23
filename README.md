@@ -1,11 +1,16 @@
 # A* Path Finder
-This is a A* Path Finder implementation with a GUI.
-This algorithm uses Manhattan distance.
+This is a A* Path Finder implementation using manhattan distance with a GUI for visualization.
+
+Built useing Python3 and PyGame.
 
 ## Examples
 <img src="/Photos/Example.png">
-
+<img src="/Photos/Example2.png">
+<img src="/Photos/Example3.png">
+<img src="/Photos/Example4.png">
+<img src="/Photos/Example5.png">
+<img src="/Photos/Example6.png">
 
 
 ## Future updates
-- Show how the algorithm finds the correct path
+- Visualize how the algorithm finds the shortest path
