@@ -103,6 +103,8 @@ squares = startNodes()
 #shortest path
 path = []
 
+LINES_ON = False
+
 key = 1
 click = False
 running = True
@@ -116,20 +118,20 @@ while running:
             if event.key == py.K_BACKSPACE:
                 squares = restart()
                 key = 1
+            if event.key == py.K_l:
+                LINES_ON = not LINES_ON
         if event.type == py.MOUSEBUTTONDOWN:
             #get mouse location 
             click = True
             while click: #works but must re think, bugs with key
                 position = py.mouse.get_pos()
                 changeNodes(squares,position,key,screen)
-                #drawLines(screen)
                 py.display.update()
                 for event2 in py.event.get():
                     if event2.type == py.MOUSEBUTTONUP:
                         click = False
             key = key + 1
 
-    drawNodes(screen,squares)
-    #drawLines(screen)
+    drawNodes(screen,squares,LINES_ON)
     py.display.update()
 

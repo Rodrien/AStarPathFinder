@@ -60,10 +60,12 @@ def restart():
     squares = startNodes()
     return squares
 
-def drawNodes(screen,list):
+def drawNodes(screen,list,lines):
     for x in range(CANTIDAD):
         for y in range(CANTIDAD):
             list[x][y].draw(screen)
+    if lines:
+        drawLines(screen)
 
 def changeNodes(list,position,key,screen): #key = 1 or 2 and is used to set the starting and finishing nodes
     for x in range(CANTIDAD):
