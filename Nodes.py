@@ -56,8 +56,9 @@ def startNodes():
                 squares[x][y].color = BLACK
     return squares 
 
-def restart(squares):
+def restart():
     squares = startNodes()
+    return squares
 
 def drawNodes(screen,list):
     for x in range(CANTIDAD):

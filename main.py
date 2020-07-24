@@ -22,7 +22,11 @@ def solve(squares):
                 grid[x][y] = 'X'
 
     path = finder(grid,open_nodes,closed_nodes,start,finish)
-    return path
+
+    #change nodes to represent the path
+    for p in path: 
+        (x,y) = p
+        squares[x][y].color = PURPLE
 
 def finder(grid,open_nodes,closed_nodes,start,finish):
     while(open_nodes != []):
@@ -41,7 +45,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
             return path[::-1] #path reversed
         else: #current != finish
             (x,y) = current.position
-            neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1)]#,(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)]
+            neighbors = [(x-1, y),(x+1, y),(x, y-1),(x, y+1)]
             for i in neighbors:
                 (a,b) = i #neighbors coordinates
                 if grid[a][b] == 'X': 
@@ -54,7 +58,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
                         door = False
                 if door:
                     son.hcost = distance(son,finish)
-                    son.gcost = current.gcost + 1 #distance(son,start)
+                    son.gcost = current.gcost + 1
                     son.fcost = son.hcost + son.gcost
                     if(addToOpen(open_nodes,son)):
                         for f in open_nodes:
@@ -87,9 +91,9 @@ def sorted(open_nodes): #returns open nodes sorted with sorted value
     open_nodes.remove(low)
     open_nodes.insert(0,low)
 
-#load logo and set window name and background
-#logo = py.image.load("./Icons/snake64.png")
-#py.display.set_icon(logo)
+#load logo and set window name
+logo = py.image.load("./Icon.png")
+py.display.set_icon(logo)
 py.display.set_caption("Path Finder")
 screen = py.display.set_mode((W_SIZE+1,W_SIZE+1))
 
@@ -108,11 +112,10 @@ while running:
             running = False
         if event.type == py.KEYDOWN:
             if event.key == py.K_RETURN:
-                path = solve(squares)
-                paint(squares,path)
-            if event.key == py.K_BACKSPACE: #fix
-                restart(squares)
-                print("in")
+                solve(squares)
+            if event.key == py.K_BACKSPACE:
+                squares = restart()
+                key = 1
         if event.type == py.MOUSEBUTTONDOWN:
             #get mouse location 
             click = True
