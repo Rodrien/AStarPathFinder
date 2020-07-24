@@ -19,6 +19,7 @@ Built using Python3 and PyGame.
 <img src="/Photos/Example6.png">
 
 ## Future updates
-- Fix minor bigs with gui.
+- Fix minor bugs with gui.
+- Add icon.
 - Visualize how the algorithm finds the shortest path.
 

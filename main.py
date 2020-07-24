@@ -54,7 +54,7 @@ def finder(grid,open_nodes,closed_nodes,start,finish):
                         door = False
                 if door:
                     son.hcost = distance(son,finish)
-                    son.gcost = distance(son,start)
+                    son.gcost = current.gcost + 1 #distance(son,start)
                     son.fcost = son.hcost + son.gcost
                     if(addToOpen(open_nodes,son)):
                         for f in open_nodes:
